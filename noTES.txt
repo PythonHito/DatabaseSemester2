@@ -1,0 +1,3 @@
+Ask about whether email should be unique
+Check that what you're doing with foreign keys in DDL is correct
+APPLY INDEXES LATER WHEN USE CASES BECOME CLEARER TO MAX PERFORMANCE
