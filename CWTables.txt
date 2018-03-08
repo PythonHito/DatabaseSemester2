@@ -3,25 +3,30 @@ CREATE TABLE Staff
 (
 	StaffID		INTEGER PRIMARY KEY,
 	Name			VARCHAR(40) NOT NULL
+		check (Name <> '')
 )
 
 CREATE TABLE Product
 (
 	ProductID		INTEGER PRIMARY KEY,
 	Name			VARCHAR(40) NOT NULL
+		check (Name <> '')
 )
 
 CREATE TABLE Customer
 (
 	CustomerID		INTEGER PRIMARY KEY,
-	Name			VARCHAR(40) NOT NULL,
+	Name			VARCHAR(40) NOT NULL
+		check (Name <> ''),
 	Email			VARCHAR(40) NOT NULL
+		check (Email <> '')
 )
 
 CREATE TABLE Ticket
 (
 	TicketID		INTEGER PRIMARY KEY,
-	Problem		VARCHAR(1000) NOT NULL,
+	Problem		VARCHAR(1000) NOT NULL
+		check (Problem <> ''),
 	Status		VARCHAR(20) NOT NULL
 		CHECK (Status in ('open', 'closed')),
 	Priority		INTEGER NOT NULL
@@ -30,26 +35,27 @@ CREATE TABLE Ticket
 	CustomerID		INTEGER NOT NULL,
 	FOREIGN KEY (Ticket.CustomerID) REFERENCES Customer.CustomerID
 			ON DELETE RESTRICT,
-			ON UPDATE CASCADE
+			ON UPDATE RESTRICT
 	ProductID		INTEGER NOT NULL,
 	FOREIGN KEY (Ticket.ProductID) REFERENCES Product.ProductID
 			ON DELETE RESTRICT,
-			ON UPDATE CASCADE
+			ON UPDATE RESTRICT
 )
 
 CREATE TABLE TicketUpdate
 (
 	TicketUpdateID	INTEGER PRIMARY KEY,
-	Message		VARCHAR(1000) NOT NULL,
+	Message		VARCHAR(1000) NOT NULL
+		check (Message <> ''),
 	UpdateTime		TIMESTAMP NOT NULL,
 	TicketID		INTEGER NOT NULL,
 	FOREIGN KEY (TicketUpdate.TicketID) REFERENCES Ticket.TicketID
 			ON DELETE RESTRICT,
-			ON UPDATE CASCADE	
+			ON UPDATE RESTRICT	
 	StaffID		INTEGER
 	FOREIGN KEY (TicketUpdate.StaffID) REFERENCES Staff.StaffID
 			ON DELETE RESTRICT,
-			ON UPDATE CASCADE
+			ON UPDATE RESTRICT
 )
 
 //EXPECT INDEX INSTRUCTIONS HERE
