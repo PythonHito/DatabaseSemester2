@@ -1,19 +1,20 @@
 
-create schema coursework
+create schema TicketSystem;
+set search_path to TicketSystem;
 
 CREATE TABLE Staff
 (
 	StaffID		INTEGER PRIMARY KEY,
 	Name			VARCHAR(40) NOT NULL
 		check (Name <> '')
-)
+);
 
 CREATE TABLE Product
 (
 	ProductID		INTEGER PRIMARY KEY,
 	Name			VARCHAR(40) NOT NULL
 		check (Name <> '')
-)
+);
 
 CREATE TABLE Customer
 (
@@ -22,7 +23,7 @@ CREATE TABLE Customer
 		check (Name <> ''),
 	Email			VARCHAR(40) NOT NULL
 		check (Email <> '')
-)
+);
 
 CREATE TABLE Ticket
 (
@@ -42,7 +43,7 @@ CREATE TABLE Ticket
 	FOREIGN KEY (Ticket.ProductID) REFERENCES Product.ProductID
 			ON DELETE RESTRICT,
 			ON UPDATE RESTRICT
-)
+);
 
 CREATE TABLE TicketUpdate
 (
@@ -58,6 +59,6 @@ CREATE TABLE TicketUpdate
 	FOREIGN KEY (TicketUpdate.StaffID) REFERENCES Staff.StaffID
 			ON DELETE RESTRICT,
 			ON UPDATE RESTRICT
-)
+);
 
 //EXPECT INDEX INSTRUCTIONS HERE
