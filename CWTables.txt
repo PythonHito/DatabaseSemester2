@@ -1,4 +1,6 @@
 
+create schema coursework
+
 CREATE TABLE Staff
 (
 	StaffID		INTEGER PRIMARY KEY,
