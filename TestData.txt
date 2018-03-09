@@ -1,0 +1,15 @@
+insert into Staff values (1, 'Dave Smith');
+insert into Staff values (2, 'Bob Marly');
+insert into Staff values (3, 'Molly Hetchson');
+
+insert into Product values (1, 'Half Life 3');
+insert into Product values (2, 'Stevo's Electric Boogaloo');
+
+insert into Customer values (1, 'Daniel Spaniel');
+insert into Customer values (2, 'Crytal Pepsi');
+insert into Customer values (3, 'Balarz Ohmigogs');
+
+//Test empty string domain check
+insert into Staff values (4, '');
+
+//Test Status domain check

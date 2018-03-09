@@ -3,4 +3,6 @@ Check that what you're doing with foreign keys in DDL is correct
 APPLY INDEXES LATER WHEN USE CASES BECOME CLEARER TO MAX PERFORMANCE
 
 Do domain check on strings so that they aren't empty ;)
-Email domain check check 
+Email domain check check
+Email sql conventions
+remember to implement ticket constraint
