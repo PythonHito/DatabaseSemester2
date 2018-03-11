@@ -2,6 +2,11 @@
 create schema TicketSystem;
 set search_path to TicketSystem;
 
+create or replace function ticketHasUpdate (integer) returns bool as'	
+	SELECT EXISTS(select TicketID from TicketUpdate where TicketID = $1);
+'
+	language sql;
+
 CREATE TABLE Staff
 (
 	StaffID		INTEGER PRIMARY KEY,
@@ -31,7 +36,7 @@ CREATE TABLE Ticket
 	Problem		VARCHAR(1000) NOT NULL
 		check (Problem <> ''),
 	Status		VARCHAR(20) NOT NULL
-		CHECK (Status in ('open', 'closed')),
+		CHECK (Status = 'open' or (Status = 'closed' and ticketHasUpdate(TicketID) = true)),
 	Priority		INTEGER NOT NULL
 		CHECK (Priority >= 1 and Priority <= 3),
 	LoggedTime		TIMESTAMP NOT NULL,

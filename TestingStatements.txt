@@ -8,6 +8,9 @@ insert into Ticket values (1, 'Example', 'open', 1, current_timestamp, 1, 1)
 --Negative
 insert into Ticket values (2, 'Another Example', 'wacky stuff', 3, current_timestamp, 2, 2)
 
+--Test that a ticket isn't allowed to be closed until it has at least one update
+--SEE YA NEXT TIME YA FAD FIVE MY MAN OH YEAH YEAH YEAH
+
 --Test Priority domain constraint
 --Negative
 insert into Ticket values (3, 'Another Example more', 'open', 1070, current_timestamp, 2, 1)
