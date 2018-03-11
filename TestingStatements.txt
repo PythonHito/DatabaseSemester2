@@ -1,0 +1,29 @@
+--Test empty string domain check
+insert into Staff values (4, '');
+
+--Test Status domain constraint
+--Positive
+insert into Ticket values (1, 'Example', 'open', 1, current_timestamp, 1, 1)
+
+--Negative
+insert into Ticket values (2, 'Another Example', 'wacky stuff', 3, current_timestamp, 2, 2)
+
+--Test Priority domain constraint
+--Negative
+insert into Ticket values (3, 'Another Example more', 'open', 1070, current_timestamp, 2, 1)
+
+--Test Foreign key behaviour
+--Test that a customer with tickets ISN'T deleted
+delete from customer where CustomerID = 1;
+
+--Test converse
+insert into Customer values (4, 'Temp', 'tempest man');
+delete from Customer where CustomerID = 4;
+
+--Test that updates on CustomerID with tickets ISN'T allowed
+update Customer set customerid = 90 where customerid = 1;
+
+--Test email unique behaviour
+--Test that no duplicate email allowed
+insert into Customer values (4, 'Temp', 'danielspaniel@gmail.com');
+
