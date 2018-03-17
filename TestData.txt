@@ -3,13 +3,14 @@ insert into Staff values (2, 'Bob Marly');
 insert into Staff values (3, 'Molly Hetchson');
 
 insert into Product values (1, 'Half Life 3');
-insert into Product values (2, 'Stevo\'s Electric Boogaloo');
+insert into Product values (2, 'Stevos Electric Boogaloo');
 
 insert into Customer values (1, 'Daniel Spaniel', 'danielspaniel@gmail.com');
 insert into Customer values (2, 'Crytal Pepsi', 'crystal@gmail.com');
 insert into Customer values (3, 'Balarz Ohmigogs', '8937L:KLKLdh@hacs.com');
 
 insert into Ticket values (1, 'The doors fell off!', 'open', 1, current_timestamp, 1, 1);
-insert into Ticket values (2, 'Steveo is not a cool guy', 'closed', 2, current_timestamp, 3, 2);
+insert into Ticket values (2, 'Steveo is not a cool guy', 'open', 2, current_timestamp, 3, 2);
 
 insert into TicketUpdate values (1, 'Steveo IS a cool guy, case closed', current_timestamp, 2, 1);
+update Ticket set Status = 'closed' where TicketID = 2;

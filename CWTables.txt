@@ -1,11 +1,6 @@
-
+drop schema TicketSystem cascade;
 create schema TicketSystem;
 set search_path to TicketSystem;
-
-create or replace function ticketHasUpdate (integer) returns bool as'	
-	SELECT EXISTS(select TicketID from TicketUpdate where TicketID = $1);
-'
-	language sql;
 
 CREATE TABLE Staff
 (
@@ -35,19 +30,18 @@ CREATE TABLE Ticket
 	TicketID		INTEGER PRIMARY KEY,
 	Problem		VARCHAR(1000) NOT NULL
 		check (Problem <> ''),
-	Status		VARCHAR(20) NOT NULL
-		CHECK (Status = 'open' or (Status = 'closed' and ticketHasUpdate(TicketID) = true)),
+	Status		VARCHAR(20) NOT NULL,
 	Priority		INTEGER NOT NULL
 		CHECK (Priority >= 1 and Priority <= 3),
 	LoggedTime		TIMESTAMP NOT NULL,
 	CustomerID		INTEGER NOT NULL,
 	FOREIGN KEY (CustomerID) REFERENCES Customer
 			ON DELETE RESTRICT
-			ON UPDATE RESTRICT,
+			ON UPDATE CASCADE,
 	ProductID		INTEGER NOT NULL,
 	FOREIGN KEY (ProductID) REFERENCES Product
-			ON DELETE RESTRICT
-			ON UPDATE RESTRICT,
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 );
 
 CREATE TABLE TicketUpdate
@@ -58,12 +52,30 @@ CREATE TABLE TicketUpdate
 	UpdateTime		TIMESTAMP NOT NULL,
 	TicketID		INTEGER NOT NULL,
 	FOREIGN KEY (TicketID) REFERENCES Ticket
-			ON DELETE RESTRICT
-			ON UPDATE RESTRICT,
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	StaffID		INTEGER,
 	FOREIGN KEY (StaffID) REFERENCES Staff
 			ON DELETE RESTRICT
-			ON UPDATE RESTRICT,
+			ON UPDATE CASCADE
 );
+
+create or replace function ticketHasUpdate (integer) returns bool as'	
+	SELECT EXISTS(select TicketID from TicketUpdate where TicketID = $1);
+'
+	language sql;
+	
+Alter table Ticket
+	add constraint status_check check ((Status = 'open') or (Status = 'closed' and ticketHasUpdate(TicketID) = true));
+
+create or replace function StatusDomainIntegrityCorrection() returns trigger as $$
+begin
+update ticket set status = 'open' where (tickethasupdate(ticketID) = false);
+end
+$$ language plpgsql;
+
+create trigger StatusDomainIntegrityTrigger
+after delete on ticketupdate
+execute procedure StatusDomainIntegrityCorrection();	
 
 --EXPECT INDEX INSTRUCTIONS HERE

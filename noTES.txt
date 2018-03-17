@@ -4,5 +4,6 @@ APPLY INDEXES LATER WHEN USE CASES BECOME CLEARER TO MAX PERFORMANCE
 
 Email domain check check
 Email sql conventions
-remember to implement ticket constraint
 Priority direction?
+
+Find out how to make TICKETUPDATE undeleteable.

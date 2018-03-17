@@ -1,32 +1,41 @@
---Test empty string domain check
+--Test empty string domain check CHECKED
 insert into Staff values (4, '');
 
 --Test Status domain constraint
---Positive
+--Positive CHECKED
 insert into Ticket values (1, 'Example', 'open', 1, current_timestamp, 1, 1)
 
---Negative
+--Negative CHECKED
 insert into Ticket values (2, 'Another Example', 'wacky stuff', 3, current_timestamp, 2, 2)
 
---Test that a ticket isn't allowed to be closed until it has at least one update
---SEE YA NEXT TIME YA FAD FIVE MY MAN OH YEAH YEAH YEAH
+--Test that a ticket isn't allowed to be closed until it has at least one update CHECKED
+insert into Ticket values (4, 'Illegal', 'closed', 1, current_timestamp, 1, 1);
 
 --Test Priority domain constraint
---Negative
+--Negative CHECKED
 insert into Ticket values (3, 'Another Example more', 'open', 1070, current_timestamp, 2, 1)
 
 --Test Foreign key behaviour
---Test that a customer with tickets ISN'T deleted
+--Test that a customer or staff with tickets ISN'T deleted CHECKED
 delete from customer where CustomerID = 1;
+delete from staff where staffid = 1;
 
---Test converse
+--Test converse CHECKED
 insert into Customer values (4, 'Temp', 'tempest man');
 delete from Customer where CustomerID = 4;
 
---Test that updates on CustomerID with tickets ISN'T allowed
+--Test that updates on an ID with tickets cascade CHECKED
 update Customer set customerid = 90 where customerid = 1;
 
+--Test that deleting a product deletes its associated tickets CHECKED
+delete from product where ProductID = 1;
+
+--Test that deleting a ticket deletes its associated ticketupdates CHECKED
+delete from ticket where ticketid = 1;
+
 --Test email unique behaviour
---Test that no duplicate email allowed
+--Test that no duplicate email allowed CHECKED
 insert into Customer values (4, 'Temp', 'danielspaniel@gmail.com');
 
+--Test the thing
+yeahuadk;ngodasngld;jgkladjklgjadklsgjkldsjgkl
