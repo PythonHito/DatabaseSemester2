@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket submitted</title>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+        <br/>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Problem</td>
+        <td>Status</td>
+        <td>Priority</td>
+        <td>LoggedTime</td>
+        <td>CustomerID</td>
+        <td>ProductID</td>
+    </tr>
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ticket[0]}}</td>
+        <td>{{ticket[1]}}</td>
+        <td>{{ticket[2]}}</td>
+        <td>{{ticket[3]}}</td>
+        <td>{{ticket[4]}}</td>
+        <td>{{ticket[5]}}</td>
+        <td>{{ticket[6]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href = "/">Back</a>
+</body>
+</html>

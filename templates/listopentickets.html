@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open tickets</title>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+        <br/>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<table>
+    <tr>
+        <td>TicketID</td>
+        <td>Last update time</td>
+    </tr>
+    {% for ticket in tickets %}
+    <tr>
+        <td>{{ticket[0]}}</td>
+        <td>{{ticket[1]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href = "/">Back</a>
+</body>
+</html>

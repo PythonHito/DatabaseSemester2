@@ -4,21 +4,24 @@ set search_path to TicketSystem;
 
 CREATE TABLE Staff
 (
-	StaffID		INTEGER PRIMARY KEY,
+	StaffID		INTEGER PRIMARY KEY
+	    check (StaffID > 0),
 	Name			VARCHAR(40) NOT NULL
 		check (Name <> '')
 );
 
 CREATE TABLE Product
 (
-	ProductID		INTEGER PRIMARY KEY,
+	ProductID		INTEGER PRIMARY KEY
+	    check (ProductID > 0),
 	Name			VARCHAR(40) NOT NULL
 		check (Name <> '')
 );
 
 CREATE TABLE Customer
 (
-	CustomerID		INTEGER PRIMARY KEY,
+	CustomerID		INTEGER PRIMARY KEY
+	    check (CustomerID > 0),
 	Name			VARCHAR(40) NOT NULL
 		check (Name <> ''),
 	Email			VARCHAR(40) NOT NULL UNIQUE
@@ -27,7 +30,8 @@ CREATE TABLE Customer
 
 CREATE TABLE Ticket
 (
-	TicketID		INTEGER PRIMARY KEY,
+	TicketID		INTEGER PRIMARY KEY
+	    check (TicketID > 0),
 	Problem		VARCHAR(1000) NOT NULL
 		check (Problem <> ''),
 	Status		VARCHAR(20) NOT NULL,
@@ -46,7 +50,8 @@ CREATE TABLE Ticket
 
 CREATE TABLE TicketUpdate
 (
-	TicketUpdateID	INTEGER PRIMARY KEY,
+	TicketUpdateID	INTEGER PRIMARY KEY
+	    check (TicketUpdateID > 0),
 	Message		VARCHAR(1000) NOT NULL
 		check (Message <> ''),
 	UpdateTime		TIMESTAMP NOT NULL,
@@ -60,9 +65,9 @@ CREATE TABLE TicketUpdate
 			ON UPDATE CASCADE
 );
 
-create or replace function ticketHasUpdate (integer) returns bool as'	
+create or replace function ticketHasUpdate (integer) returns bool as $$
 	SELECT EXISTS(select TicketID from TicketUpdate where TicketID = $1);
-'
+$$
 	language sql;
 	
 Alter table Ticket
@@ -71,11 +76,71 @@ Alter table Ticket
 create or replace function StatusDomainIntegrityCorrection() returns trigger as $$
 begin
 update ticket set status = 'open' where (tickethasupdate(ticketID) = false);
+return new;
 end
 $$ language plpgsql;
 
 create trigger StatusDomainIntegrityTrigger
 after delete on ticketupdate
 execute procedure StatusDomainIntegrityCorrection();	
+
+create view openticketlatestupdate as
+	select ticket.ticketid, to_char(max(updatetime), 'YYYY MM DD HH24:MI:SS') as LatestUpdate from ticket join ticketupdate
+	on ticket.ticketid = ticketupdate.ticketid and status = 'open' group by ticket.ticketid;
+
+create or replace function 	ticketandupdates(ticktid int) returns table(atime text, mess character varying, thor character varying) as $$
+declare
+	customer character varying := name from ticket, customer
+	where ticket.customerid = customer.customerid and ticketid = $1;
+begin
+return query select * from (select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') as loggedtime, message, author from
+(select * from (select loggedtime, problem as message, name as author
+from ticket, customer where ticket.customerid = customer.customerid and ticketid = $1
+union
+select updatetime as loggedtime, message, name as author
+from ticketupdate, staff where (ticketupdate.staffid = staff.staffid) and ticketid = $1
+union
+select updatetime as loggedtime, message, customer as author
+from ticketupdate, staff where (ticketupdate.staffid is null) and ticketid = $1) as temp order by loggedtime) as temp) as temp;
+end
+$$ language plpgsql;
+
+create type closedticketstatus as
+	(number_of_updates int, problem_description character varying, timeuntilfirstupdate text, timeuntillastupdate text);
+
+create or replace function ticketupdatestatus() returns setof closedticketstatus as $$
+declare
+	ids bigint[] := array(select ticketid from ticket where status = 'closed');
+	id bigint;
+
+	description character varying;
+	num_updates int;
+	original_time timestamp;
+	first_update_time timestamp;
+	latest_update_time timestamp;
+
+	ret record;
+begin
+	foreach id in array ids
+	loop
+		num_updates := count(*) from ticketupdate where ticketid = id;
+		description := problem from ticket where ticketid = id;
+		original_time := loggedtime from ticket where ticketid = id;
+		first_update_time := min(updatetime) from ticketupdate where ticketid = id;
+		latest_update_time := max(updatetime) from ticketupdate where ticketid = id;
+
+		select num_updates, description,
+		to_char(first_update_time-original_time, 'DD HH24:MI:SS'),
+		to_char(latest_update_time-original_time, 'DD HH24:MI:SS')
+		into ret;
+
+		return next ret;
+	end	loop;
+end
+$$ language plpgsql;
+
+create or replace view closedticketupdatestatus
+	as select * from ticketupdatestatus();
+
 
 --EXPECT INDEX INSTRUCTIONS HERE

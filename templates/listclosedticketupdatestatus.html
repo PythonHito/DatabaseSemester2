@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket statuses</title>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+        <br/>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<table>
+    <tr>
+        <td>Number of updates</td>
+        <td>Original problem description</td>
+        <td>Time between ticket and first update</td>
+        <td>Time between ticket and last update</td>
+    </tr>
+    {% for line in lines %}
+    <tr>
+        <td>{{line[0]}}</td>
+        <td>{{line[1]}}</td>
+        <td>{{line[2]}}</td>
+        <td>{{line[3]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href = "/">Back</a>
+</body>
+</html>

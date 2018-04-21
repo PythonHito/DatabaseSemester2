@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket and updates</title>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+        <br/>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<table>
+    <tr>
+        <td>Time logged</td>
+        <td>Description</td>
+        <td>Author</td>
+    </tr>
+    {% for line in lines %}
+    <tr>
+        <td>{{line[0]}}</td>
+        <td>{{line[1]}}</td>
+        <td>{{line[2]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href = "/">Back</a>
+</body>
+</html>
