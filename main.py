@@ -12,6 +12,7 @@ app.secret_key = "ld;clasdkjfl;asdfjas;"
 #TODO: The fuck cursor_factory do?
 #TODO Maybe make sure html validates
 #TODO: ticketandupdates is TERRIFYING, fix it
+#TODO: Make closed ticket say days init
 
 def getConn():
     connStr = "dbname = 'postgres' user='postgres' password = 'password'"
@@ -118,6 +119,7 @@ def listOpenTickets():
         return redirect(url_for(".home"))
     else:
         tickets = cur.fetchall()
+        flash("Open Tickets successfully retrieved")
         return render_template("listopentickets.html", tickets=tickets)
     finally:
         if not (conn is None):

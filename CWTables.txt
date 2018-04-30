@@ -94,14 +94,15 @@ declare
 	where ticket.customerid = customer.customerid and ticketid = $1;
 begin
 return query select * from (select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') as loggedtime, message, author from
-(select * from (select loggedtime, problem as message, name as author
-from ticket, customer where ticket.customerid = customer.customerid and ticketid = $1
-union
-select updatetime as loggedtime, message, name as author
-from ticketupdate, staff where (ticketupdate.staffid = staff.staffid) and ticketid = $1
-union
-select updatetime as loggedtime, message, customer as author
-from ticketupdate, staff where (ticketupdate.staffid is null) and ticketid = $1) as temp order by loggedtime) as temp) as temp;
+(select * from (
+    select loggedtime, problem as message, name as author from ticket, customer where ticketid = $1
+    union
+    select updatetime as loggedtime, message, name as author
+        from ticketupdate, staff where ticketid = $1
+    union
+    select updatetime as loggedtime, message, customer as author
+        from ticketupdate, staff where (ticketupdate.staffid is null) and ticketid = $1)
+as temp order by loggedtime) as temp) as temp;
 end
 $$ language plpgsql;
 
@@ -144,3 +145,5 @@ create or replace view closedticketupdatestatus
 
 
 --EXPECT INDEX INSTRUCTIONS HERE
+CREATE INDEX Status_index on Ticket (Status);
+CREATE INDEX Ticket_index on TicketUpdate (Ticket);

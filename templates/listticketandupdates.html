@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Ticket and updates</title>
+    <style>
+        td {
+            border-style: solid;
+        }
+    </style>
 </head>
 <body>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
+    <h1>
     {% for message in messages %}
       {{ message }}
+    </h1>
         <br/>
     {% endfor %}
   {% endif %}
 {% endwith %}
+
 <table>
     <tr>
         <td>Time logged</td>
