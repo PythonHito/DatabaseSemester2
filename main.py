@@ -7,12 +7,9 @@ app.secret_key = "ld;clasdkjfl;asdfjas;"
 
 #TODO: ask about how to deal with IDs
 #TODO: ask about trigger nesserary
-#TODO: Can we format in python?
 
 #TODO: The fuck cursor_factory do?
-#TODO Maybe make sure html validates
 #TODO: ticketandupdates is TERRIFYING, fix it
-#TODO: Make closed ticket say days init
 
 def getConn():
     connStr = "dbname = 'postgres' user='postgres' password = 'password'"
@@ -34,7 +31,16 @@ def addCustomer():
         cur.execute("insert into customer values (%s, %s, %s)", (ID, name, email))
     except psycopg2.DatabaseError as e:
         conn.rollback()
-        flash(e.pgerror)
+        if e.pgcode == "23505":
+            flash("A customer with that ID already exists")
+        elif e.pgcode == "22003":
+            flash("A customer with that email address already exists")
+        elif e.pgcode == "23514":
+            flash("Data of an incorrect nature was inputted into a field (check violation)")
+        elif e.pgcode == "22003":
+            flash("A numeric value is out of range")
+        else:
+            flash(e.pgcode)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -65,7 +71,16 @@ def addTicket():
         cur.execute("select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') from ticket where ticketid = %s" % (ID))
     except psycopg2.DatabaseError as e:
         conn.rollback()
-        flash(e.pgerror)
+        if e.pgcode == "23505":
+            flash("A ticket with that ID already exists")
+        elif e.pgcode == "23514":
+            flash("Data of an incorrect type was inputted into a field")
+        elif e.pgcode == "22003":
+            flash("A numeric value is out of range")
+        elif e.pgcode == "23503":
+            flash("Foreign key provide refers to a non-existent entity")
+        else:
+            flash(e.pgcode)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -95,7 +110,16 @@ def addUpdate():
                     (ID, message, ticketid, staffid))
     except psycopg2.DatabaseError as e:
         conn.rollback()
-        flash(e.pgerror)
+        if e.pgcode == "23505":
+            flash("A ticketupdate with that ID already exists")
+        elif e.pgcode == "23514":
+            flash("Data of an incorrect type was inputted into a field")
+        elif e.pgcode == "22003":
+            flash("A numeric value is out of range")
+        elif e.pgcode == "23503":
+            flash("Foreign key provide refers to a non-existent entity")
+        else:
+            flash(e.pgcode)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -141,6 +165,12 @@ def closeTicket():
         flash(e.pgerror)
         redirect(url_for(".home"))
     else:
+        cur.execute("select * from ticket where ticketid = %s", [int(ID)])
+        if cur.fetchall() == []:
+            conn.rollback()
+            flash("A ticket with that ID doesn't exist")
+            return redirect(url_for(".home"))
+
         conn.commit()
         flash("Ticket has been closed successfully")
         return redirect(url_for(".home"))
@@ -163,6 +193,10 @@ def listTicketAndUpdates():
         return redirect(url_for(".home"))
     else:
         lines = cur.fetchall()
+        if lines == []:
+            conn.rollback()
+            flash("A ticket with that ID doesn't exist")
+            return redirect(url_for(".home"))
         flash("Update chain retrieved successfully")
         return render_template("listticketandupdates.html", lines=lines)
     finally:
@@ -202,9 +236,22 @@ def deleteCustomer():
         cur.execute("delete from customer where customerid = %s", [int(ID)])
     except psycopg2.DatabaseError as e:
         conn.rollback()
-        flash(e.pgerror)
+        if e.pgcode == "23505":
+            flash("A  with that ID already exists")
+        elif e.pgcode == "23514":
+            flash("Data of an incorrect type was inputted into a field")
+        elif e.pgcode == "22003":
+            flash("A numeric value is out of range")
+        elif e.pgcode == "23503":
+            flash("A customer's associated tickets must be deleted first")
+        else:
+            flash(e.pgcode)
         return redirect(url_for(".home"))
     else:
+        if cur.fetchall() == []:
+            flash("A customer with that ID doesn't exist")
+            return redirect(url_for(".home"))
+
         conn.commit()
         flash("Customer successfully deleted")
         return redirect(url_for(".home"))

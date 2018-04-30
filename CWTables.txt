@@ -146,4 +146,5 @@ create or replace view closedticketupdatestatus
 
 --EXPECT INDEX INSTRUCTIONS HERE
 CREATE INDEX Status_index on Ticket (Status);
-CREATE INDEX Ticket_index on TicketUpdate (Ticket);
+CREATE INDEX TicketUpdate_TicketID_index on TicketUpdate (TicketID);
+CREATE INDEX Priority_index on Ticket (Priority);

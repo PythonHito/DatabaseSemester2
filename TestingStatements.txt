@@ -1,9 +1,9 @@
+begin;
 --Test empty string domain check CHECKED
 insert into Staff values (4, '');
 
 --Test Status domain constraint
 --Positive CHECKED
-begin;
 insert into Ticket values (3, 'Example', 'open', 1, current_timestamp, 1, 1)
 
 --Negative CHECKED
@@ -26,15 +26,12 @@ insert into Customer values (4, 'Temp', 'tempest man');
 delete from Customer where CustomerID = 4;
 
 --Test that updates on an ID with tickets cascade CHECKED
-begin;
 update Customer set customerid = 90 where customerid = 1;
 
 --Test that deleting a product deletes its associated tickets CHECKED
-begin;
 delete from product where ProductID = 1;
 
 --Test that deleting a ticket deletes its associated ticketupdates CHECKED
-begin;
 delete from ticket where ticketid = 1;
 
 --Test email unique behaviour
@@ -47,13 +44,11 @@ insert into Customer values (-5, 'Temp', 'danielspan11iel@gmail.com');
 
 --Test tickethasupdate function
 --Expecting true CHECKED
-begin;
 insert into Ticket values (10, 'Example', 'open', 1, current_timestamp, 1, 1);
 insert into TicketUpdate values (10, 'Steveo IS a cool guy, case closed', current_timestamp, 10, 1);
 select tickethasupdate(10);
 
 --Expecting false CHECKED
-begin;
 insert into Ticket values (10, 'Example', 'open', 1, current_timestamp, 1, 1);
 select tickethasupdate(10);
 
@@ -63,7 +58,6 @@ select tickethasupdate(10);
 select * from openticketlatestupdate;
 
 --Expecting ticket with ticketid = 2 with latest update close to current time CHECKED
-begin;
 insert into TicketUpdate values (10, 'Steveo IS a cool guy, case closed', current_timestamp, 2, 1);
 select * from openticketlatestupdate;
 
@@ -80,9 +74,8 @@ select * from ticketandupdates(1);
 select * from closedticketupdatestatus;
 
 --Expecting 2 rows with the new row having values (1, "The doors fell off!", *reasonable duration*, *reasonable duration*) CHECKED
-begin;
 insert into ticketupdate values  (11, 'Steveo IS a cool guy, case closed', current_timestamp, 1, 1);
 update ticket set status = 'closed' where ticketid = 1;
 
 select * from closedticketupdatestatus;
-
+rollback;

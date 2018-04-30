@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b59aeec1-9d9e-49e0-9427-7e24e8d06171" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml___jb_tmp___" afterPath="" />
       <change beforePath="$PROJECT_DIR$/CWTables.txt" afterPath="$PROJECT_DIR$/CWTables.txt" />
+      <change beforePath="$PROJECT_DIR$/TestingStatements.txt" afterPath="$PROJECT_DIR$/TestingStatements.txt" />
       <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
       <change beforePath="$PROJECT_DIR$/templates/listclosedticketupdatestatus.html" afterPath="$PROJECT_DIR$/templates/listclosedticketupdatestatus.html" />
-      <change beforePath="$PROJECT_DIR$/templates/listopentickets.html" afterPath="$PROJECT_DIR$/templates/listopentickets.html" />
-      <change beforePath="$PROJECT_DIR$/templates/listticketandupdates.html" afterPath="$PROJECT_DIR$/templates/listticketandupdates.html" />
-      <change beforePath="$PROJECT_DIR$/templates/showticket.html" afterPath="$PROJECT_DIR$/templates/showticket.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,52 +18,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+    <leaf>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
-                <element signature="e#473#595#0" expanded="false" />
-                <element signature="e#666#1309#0" expanded="false" />
-                <element signature="e#1387#2519#0" expanded="false" />
-                <element signature="e#2586#3388#0" expanded="false" />
-                <element signature="e#4087#4672#0" expanded="false" />
-                <element signature="e#4760#5346#0" expanded="false" />
-                <element signature="e#5450#6023#0" expanded="false" />
-                <element signature="e#6100#6673#0" expanded="false" />
-                <element signature="e#6725#6761#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestData.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestData.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#4;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#5;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#6;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#form#7;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="e#1706#3246#0" expanded="false" />
+                <element signature="e#4607#5157#0" expanded="false" />
+                <element signature="e#5228#6053#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -73,38 +36,18 @@
       <file leaf-file-name="listclosedticketupdatestatus.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/listclosedticketupdatestatus.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="12" />
+            <state relative-caret-position="105">
+              <caret line="28" column="63" lean-forward="false" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="listopentickets.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/listopentickets.html">
+      <file leaf-file-name="CWTables.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CWTables.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listticketandupdates.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/listticketandupdates.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="showticket.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/showticket.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="2533">
+              <caret line="149" column="49" lean-forward="false" selection-start-line="149" selection-start-column="49" selection-end-line="149" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -113,18 +56,18 @@
       <file leaf-file-name="TestingStatements.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestingStatements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CWTables.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CWTables.txt">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-561">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="200">
+              <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -140,6 +83,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>begin;</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -150,19 +98,19 @@
         <option value="$PROJECT_DIR$/templates/showindex.html" />
         <option value="$PROJECT_DIR$/temp" />
         <option value="$PROJECT_DIR$/TestData.txt" />
-        <option value="$PROJECT_DIR$/TestingStatements.txt" />
         <option value="$PROJECT_DIR$/dank.py" />
-        <option value="$PROJECT_DIR$/CWTables.txt" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/templates/listclosedticketupdatestatus.html" />
         <option value="$PROJECT_DIR$/templates/listopentickets.html" />
         <option value="$PROJECT_DIR$/templates/listticketandupdates.html" />
         <option value="$PROJECT_DIR$/templates/showticket.html" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/listclosedticketupdatestatus.html" />
+        <option value="$PROJECT_DIR$/CWTables.txt" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/TestingStatements.txt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="683" />
     <option name="height" value="728" />
   </component>
@@ -181,7 +129,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -199,6 +146,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,19 +208,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18675596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11681548" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -325,17 +273,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -379,17 +316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -433,17 +359,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -487,17 +402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -526,17 +430,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="107" column="16" lean-forward="false" selection-start-line="107" selection-start-column="16" selection-end-line="107" selection-end-column="16" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -565,17 +458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -597,17 +479,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -629,17 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -661,17 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -679,17 +528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -698,49 +536,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingStatements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CWTables.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-561">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#3;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#4;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#5;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#6;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#form#7;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/listclosedticketupdatestatus.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -748,7 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -756,7 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,6 +557,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/listclosedticketupdatestatus.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="28" column="63" lean-forward="false" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -771,18 +579,28 @@
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
-            <element signature="e#473#595#0" expanded="false" />
-            <element signature="e#666#1309#0" expanded="false" />
-            <element signature="e#1387#2519#0" expanded="false" />
-            <element signature="e#2586#3388#0" expanded="false" />
-            <element signature="e#4087#4672#0" expanded="false" />
-            <element signature="e#4760#5346#0" expanded="false" />
-            <element signature="e#5450#6023#0" expanded="false" />
-            <element signature="e#6100#6673#0" expanded="false" />
-            <element signature="e#6725#6761#0" expanded="false" />
+            <element signature="e#1706#3246#0" expanded="false" />
+            <element signature="e#4607#5157#0" expanded="false" />
+            <element signature="e#5228#6053#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingStatements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CWTables.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2533">
+          <caret line="149" column="49" lean-forward="false" selection-start-line="149" selection-start-column="49" selection-end-line="149" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
