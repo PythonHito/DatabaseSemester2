@@ -1,4 +1,6 @@
-begin;
+--Add test for new constraints default
+
+
 --Test empty string domain check CHECKED
 insert into Staff values (4, '');
 

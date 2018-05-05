@@ -3,12 +3,11 @@ import psycopg2
 import psycopg2.extras
 
 app = Flask(__name__)
-app.secret_key = "ld;clasdkjfl;asdfjas;"
+app.secret_key = "random secret key"
 
 #TODO: ask about how to deal with IDs
 #TODO: ask about trigger nesserary
 
-#TODO: The fuck cursor_factory do?
 #TODO: ticketandupdates is TERRIFYING, fix it
 
 def getConn():
@@ -40,7 +39,7 @@ def addCustomer():
         elif e.pgcode == "22003":
             flash("A numeric value is out of range")
         else:
-            flash(e.pgcode)
+            flash(e.pgerror)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -50,7 +49,6 @@ def addCustomer():
         if not (conn is None):
             conn.close()
 
-#TODO: TEST
 @app.route('/addTicket', methods=["post"])
 def addTicket():
     ID = request.form['ID']
@@ -66,7 +64,8 @@ def addTicket():
     try:
         cur.execute("set search_path to ticketsystem")
 
-        cur.execute("insert into ticket values (%s, %s, %s, %s, current_timestamp, %s, %s)",
+        cur.execute("insert into ticket (TicketID, Problem, Status, Priority, CustomerID, ProductID) "
+                    "values (%s, %s, %s, %s, %s, %s)",
                     (ID, problem, status, priority, customerid, productid))
         cur.execute("select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') from ticket where ticketid = %s" % (ID))
     except psycopg2.DatabaseError as e:
@@ -80,7 +79,7 @@ def addTicket():
         elif e.pgcode == "23503":
             flash("Foreign key provide refers to a non-existent entity")
         else:
-            flash(e.pgcode)
+            flash(e.pgerror)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -106,7 +105,8 @@ def addUpdate():
 
     try:
         cur.execute("set search_path to ticketsystem")
-        cur.execute("insert into ticketupdate values (%s, %s, current_timestamp, %s, %s)",
+        cur.execute("insert into ticketupdate (TicketUpdateID, Message, TicketID, StaffID)"
+                    " values (%s, %s, %s, %s)",
                     (ID, message, ticketid, staffid))
     except psycopg2.DatabaseError as e:
         conn.rollback()
@@ -119,7 +119,7 @@ def addUpdate():
         elif e.pgcode == "23503":
             flash("Foreign key provide refers to a non-existent entity")
         else:
-            flash(e.pgcode)
+            flash(e.pgerror)
         return redirect(url_for(".home"))
     else:
         conn.commit()
@@ -245,7 +245,7 @@ def deleteCustomer():
         elif e.pgcode == "23503":
             flash("A customer's associated tickets must be deleted first")
         else:
-            flash(e.pgcode)
+            flash(e.pgerror)
         return redirect(url_for(".home"))
     else:
         if cur.fetchall() == []:

@@ -1,43 +1,52 @@
-drop schema TicketSystem cascade;
-create schema TicketSystem;
-set search_path to TicketSystem;
+DROP SCHEMA TicketSystem CASCADE;
+CREATE SCHEMA TicketSystem;
+SET SEARCH_PATH TO TicketSystem;
+
+-- RELATION DEFINITIONS
 
 CREATE TABLE Staff
 (
 	StaffID		INTEGER PRIMARY KEY
-	    check (StaffID > 0),
+	    CHECK (StaffID > 0),
 	Name			VARCHAR(40) NOT NULL
-		check (Name <> '')
+		CHECK (Name <> '')
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
 );
 
 CREATE TABLE Product
 (
 	ProductID		INTEGER PRIMARY KEY
-	    check (ProductID > 0),
+	    CHECK (ProductID > 0),
 	Name			VARCHAR(40) NOT NULL
-		check (Name <> '')
+		CHECK (Name <> '')
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
 );
 
 CREATE TABLE Customer
 (
 	CustomerID		INTEGER PRIMARY KEY
-	    check (CustomerID > 0),
+	    CHECK (CustomerID > 0),
 	Name			VARCHAR(40) NOT NULL
-		check (Name <> ''),
+		CHECK (Name <> ''),
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
 	Email			VARCHAR(40) NOT NULL UNIQUE
-		check (Email <> '')
+		CHECK (Email <> '')
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
 );
 
 CREATE TABLE Ticket
 (
 	TicketID		INTEGER PRIMARY KEY
-	    check (TicketID > 0),
+	    CHECK (TicketID > 0),
 	Problem		VARCHAR(1000) NOT NULL
-		check (Problem <> ''),
+		CHECK (Problem <> ''),
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
 	Status		VARCHAR(20) NOT NULL,
+	-- ALTER TABLE STATEMENT ADDS COMPLEX CHECK CONSTRAINT
 	Priority		INTEGER NOT NULL
-		CHECK (Priority >= 1 and Priority <= 3),
-	LoggedTime		TIMESTAMP NOT NULL,
+		CHECK (Priority >= 1 AND Priority <= 3),
+	LoggedTime		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    -- CHECK INPUTTED TIME ISN'T IN THE FUTURE
 	CustomerID		INTEGER NOT NULL,
 	FOREIGN KEY (CustomerID) REFERENCES Customer
 			ON DELETE RESTRICT
@@ -51,10 +60,12 @@ CREATE TABLE Ticket
 CREATE TABLE TicketUpdate
 (
 	TicketUpdateID	INTEGER PRIMARY KEY
-	    check (TicketUpdateID > 0),
+	    CHECK (TicketUpdateID > 0),
 	Message		VARCHAR(1000) NOT NULL
-		check (Message <> ''),
-	UpdateTime		TIMESTAMP NOT NULL,
+		CHECK (Message <> ''),
+		-- CHECK THAT ENTRY ISN'T BLANK STRING
+	UpdateTime		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    -- CHECK INPUTTED TIME ISN'T IN THE FUTURE
 	TicketID		INTEGER NOT NULL,
 	FOREIGN KEY (TicketID) REFERENCES Ticket
 			ON DELETE CASCADE
@@ -65,86 +76,106 @@ CREATE TABLE TicketUpdate
 			ON UPDATE CASCADE
 );
 
-create or replace function ticketHasUpdate (integer) returns bool as $$
-	SELECT EXISTS(select TicketID from TicketUpdate where TicketID = $1);
+-- CONSTRUCT TICKET STATUS CHECK CONSTRAINT
+
+CREATE OR REPLACE FUNCTION ticketHasUpdate (INTEGER) RETURNS BOOL AS $$
+	SELECT EXISTS(SELECT TicketID FROM TicketUpdate WHERE TicketID = $1);
 $$
-	language sql;
+	LANGUAGE sql;
 	
-Alter table Ticket
-	add constraint status_check check ((Status = 'open') or (Status = 'closed' and ticketHasUpdate(TicketID) = true));
+ALTER TABLE Ticket
+	ADD CONSTRAINT STATUS_CHECK CHECK ((Status = 'open') OR (Status = 'closed' AND ticketHasUpdate(TicketID) = TRUE));
 
-create or replace function StatusDomainIntegrityCorrection() returns trigger as $$
-begin
-update ticket set status = 'open' where (tickethasupdate(ticketID) = false);
-return new;
-end
-$$ language plpgsql;
+CREATE OR REPLACE FUNCTION StatusDomainIntegrityCorrection() RETURNS TRIGGER AS $$
+BEGIN
+UPDATE ticket SET status = 'open' WHERE (tickethasupdate(ticketID) = FALSE);
+RETURN new;
+END
+$$ LANGUAGE plpgsql;
 
-create trigger StatusDomainIntegrityTrigger
-after delete on ticketupdate
-execute procedure StatusDomainIntegrityCorrection();	
+CREATE TRIGGER StatusDomainIntegrityTrigger
+AFTER DELETE ON ticketupdate
+EXECUTE PROCEDURE StatusDomainIntegrityCorrection();
 
-create view openticketlatestupdate as
-	select ticket.ticketid, to_char(max(updatetime), 'YYYY MM DD HH24:MI:SS') as LatestUpdate from ticket join ticketupdate
-	on ticket.ticketid = ticketupdate.ticketid and status = 'open' group by ticket.ticketid;
 
-create or replace function 	ticketandupdates(ticktid int) returns table(atime text, mess character varying, thor character varying) as $$
-declare
-	customer character varying := name from ticket, customer
-	where ticket.customerid = customer.customerid and ticketid = $1;
-begin
-return query select * from (select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') as loggedtime, message, author from
-(select * from (
-    select loggedtime, problem as message, name as author from ticket, customer where ticketid = $1
-    union
-    select updatetime as loggedtime, message, name as author
-        from ticketupdate, staff where ticketid = $1
-    union
-    select updatetime as loggedtime, message, customer as author
-        from ticketupdate, staff where (ticketupdate.staffid is null) and ticketid = $1)
-as temp order by loggedtime) as temp) as temp;
-end
-$$ language plpgsql;
+-- VIEW FOR QUERYING OPEN TICKETS AND UPDATES
 
-create type closedticketstatus as
-	(number_of_updates int, problem_description character varying, timeuntilfirstupdate text, timeuntillastupdate text);
+CREATE VIEW openticket AS
+    SELECT * FROM ticket WHERE status = 'open';
 
-create or replace function ticketupdatestatus() returns setof closedticketstatus as $$
-declare
-	ids bigint[] := array(select ticketid from ticket where status = 'closed');
-	id bigint;
+CREATE VIEW openticketlatestupdate AS
+	SELECT openticket.ticketid, to_char(max(updatetime), 'YYYY MM DD HH24:MI:SS') AS LatestUpdate
+	FROM openticket LEFT JOIN ticketupdate
+	ON openticket.ticketid = ticketupdate.ticketid GROUP BY openticket.ticketid;
 
-	description character varying;
-	num_updates int;
-	original_time timestamp;
-	first_update_time timestamp;
-	latest_update_time timestamp;
+-- CHAIN OF TICKETS AND ASSOCIATED UPDATES REPORTING FUNCTION
 
-	ret record;
-begin
-	foreach id in array ids
+CREATE OR REPLACE FUNCTION ticketandupdates(ticktid INT) RETURNS
+    table(atime TEXT, description CHARACTER VARYING, author CHARACTER VARYING) AS $$
+DECLARE
+	customer CHARACTER VARYING := name FROM ticket, customer
+	WHERE ticket.customerid = customer.customerid AND ticketid = $1;
+BEGIN
+RETURN query SELECT to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') AS loggedtime, message, an_author FROM
+
+(
+    -- GET ORIGINAL TICKET
+    SELECT loggedtime, problem AS message, customer AS an_author FROM ticket WHERE ticketid = $1
+    UNION
+    -- GET TICKETUPDATES ASSOCIATED WITH STAFF
+    SELECT updatetime AS loggedtime, message, name AS an_author
+        FROM ticketupdate, staff WHERE ticketid = $1 and ticketupdate.staffid = staff.staffid
+    UNION
+    -- GET TICKETUPDATES ASSOCIATED WITH CUSTOMER
+    SELECT updatetime AS loggedtime, message, customer AS an_author
+        FROM ticketupdate, staff WHERE (ticketupdate.staffid is null) AND ticketid = $1
+)
+
+-- UNION AND ORDER BY LOGGEDTIME
+AS temp ORDER BY loggedtime;
+END
+$$ LANGUAGE plpgsql;
+
+-- CLOSED TICKET AND UPDATE REPORTING
+
+CREATE TYPE closedticketstatus AS
+	(number_of_updates INT, problem_description CHARACTER VARYING, timeuntilfirstupdate TEXT, timeuntillastupdate TEXT);
+
+CREATE OR REPLACE FUNCTION ticketupdatestatus() RETURNS SETOF closedticketstatus AS $$
+DECLARE
+	ids BIGINT[] := ARRAY(SELECT ticketid FROM ticket WHERE status = 'closed');
+	id BIGINT;
+
+	description CHARACTER VARYING;
+	num_updates INT;
+	original_time TIMESTAMP;
+	first_update_time TIMESTAMP;
+	latest_update_time TIMESTAMP;
+
+	ret RECORD;
+BEGIN
+	foreach id in ARRAY ids
 	loop
-		num_updates := count(*) from ticketupdate where ticketid = id;
-		description := problem from ticket where ticketid = id;
-		original_time := loggedtime from ticket where ticketid = id;
-		first_update_time := min(updatetime) from ticketupdate where ticketid = id;
-		latest_update_time := max(updatetime) from ticketupdate where ticketid = id;
+		num_updates := COUNT(*) FROM ticketupdate WHERE ticketid = id;
+		description := problem FROM ticket WHERE ticketid = id;
+		original_time := loggedtime FROM ticket WHERE ticketid = id;
+		first_update_time := min(updatetime) FROM ticketupdate WHERE ticketid = id;
+		latest_update_time := max(updatetime) FROM ticketupdate WHERE ticketid = id;
 
-		select num_updates, description,
+		SELECT num_updates, description,
 		to_char(first_update_time-original_time, 'DD HH24:MI:SS'),
 		to_char(latest_update_time-original_time, 'DD HH24:MI:SS')
 		into ret;
 
-		return next ret;
-	end	loop;
-end
-$$ language plpgsql;
+		RETURN next ret;
+	END	loop;
+END
+$$ LANGUAGE plpgsql;
 
-create or replace view closedticketupdatestatus
-	as select * from ticketupdatestatus();
+CREATE OR REPLACE VIEW closedticketupdatestatus
+	AS SELECT * FROM ticketupdatestatus();
 
 
---EXPECT INDEX INSTRUCTIONS HERE
-CREATE INDEX Status_index on Ticket (Status);
-CREATE INDEX TicketUpdate_TicketID_index on TicketUpdate (TicketID);
-CREATE INDEX Priority_index on Ticket (Priority);
+-- INDEXES (ONLY INCLUDED FREQUENCY QUERIED COLUMNS VIA WEBSITE)
+CREATE INDEX Status_index ON Ticket (Status);
+CREATE INDEX TicketUpdate_TicketID_index ON TicketUpdate (TicketID);
