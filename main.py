@@ -1,14 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash
 import psycopg2
 import psycopg2.extras
 
 app = Flask(__name__)
 app.secret_key = "random secret key"
 
-#TODO: ask about how to deal with IDs
-#TODO: ask about trigger nesserary
-
-#TODO: ticketandupdates is TERRIFYING, fix it
 
 def getConn():
     connStr = "dbname = 'postgres' user='postgres' password = 'password'"
@@ -16,6 +12,7 @@ def getConn():
     return conn
 
 
+#Task 1
 @app.route('/addCustomer', methods=['post'])
 def addCustomer():
     ID = request.form['ID']
@@ -49,6 +46,7 @@ def addCustomer():
         if not (conn is None):
             conn.close()
 
+#Task 2
 @app.route('/addTicket', methods=["post"])
 def addTicket():
     ID = request.form['ID']
@@ -67,6 +65,7 @@ def addTicket():
         cur.execute("insert into ticket (TicketID, Problem, Status, Priority, CustomerID, ProductID) "
                     "values (%s, %s, %s, %s, %s, %s)",
                     (ID, problem, status, priority, customerid, productid))
+        #Check the ticket was successfully inserted and then get loggedtime formated
         cur.execute("select to_char(loggedtime, 'YYYY MM DD HH24:MI:SS') from ticket where ticketid = %s" % (ID))
     except psycopg2.DatabaseError as e:
         conn.rollback()
@@ -91,13 +90,14 @@ def addTicket():
         if not (conn is None):
             conn.close()
 
-
+#Task 3
 @app.route("/addUpdate", methods=["post"])
 def addUpdate():
     ID = request.form["ID"]
     message = request.form["message"]
     ticketid = request.form["ticketid"]
     staffid = request.form["staffid"]
+    #If staffid field left empty then assign null
     staffid = None if staffid == "" else staffid
 
     conn = getConn()
@@ -129,7 +129,7 @@ def addUpdate():
         if not (conn is None):
             conn.close()
 
-
+#Task 4
 @app.route("/listOpenTickets", methods=["get"])
 def listOpenTickets():
     conn = getConn()
@@ -149,7 +149,7 @@ def listOpenTickets():
         if not (conn is None):
             conn.close()
 
-
+#Task 5
 @app.route("/closeTicket", methods=["post"])
 def closeTicket():
     ID = request.form["ID"]
@@ -178,7 +178,7 @@ def closeTicket():
         if not (conn is None):
             conn.close()
 
-
+#Task 6
 @app.route("/listTicketAndUpdates", methods=["get"])
 def listTicketAndUpdates():
     ID = request.args["ID"]
@@ -203,7 +203,7 @@ def listTicketAndUpdates():
         if not (conn is None):
             conn.close()
 
-
+#Task 7
 @app.route("/listClosedTicketUpdateStatus", methods=["get"])
 def listClosedTicketUpdateStatus():
     conn = getConn()
@@ -223,7 +223,7 @@ def listClosedTicketUpdateStatus():
         if not (conn is None):
             conn.close()
 
-
+#Task 8
 @app.route("/deleteCustomer", methods=["post"])
 def deleteCustomer():
     ID = request.form["ID"]
@@ -233,7 +233,16 @@ def deleteCustomer():
 
     try:
         cur.execute("set search_path to ticketsystem")
-        cur.execute("delete from customer where customerid = %s", [int(ID)])
+
+        #Check that the inputed customerid exists at all
+        cur.execute("select * from customer where customerid = %s" , [int(ID)])
+        if cur.fetchall() == []:
+            #Flash error if not
+            flash("A customer with that ID doesn't exist")
+            return redirect(url_for(".home"))
+        else:
+            #If it does, carry on
+            cur.execute("delete from customer where customerid = %s", [int(ID)])
     except psycopg2.DatabaseError as e:
         conn.rollback()
         if e.pgcode == "23505":
@@ -248,10 +257,6 @@ def deleteCustomer():
             flash(e.pgerror)
         return redirect(url_for(".home"))
     else:
-        if cur.fetchall() == []:
-            flash("A customer with that ID doesn't exist")
-            return redirect(url_for(".home"))
-
         conn.commit()
         flash("Customer successfully deleted")
         return redirect(url_for(".home"))
